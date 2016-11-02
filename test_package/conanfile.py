@@ -1,4 +1,5 @@
 from conans import ConanFile, CMake
+from conans.tools import os_info
 import os
 
 channel = os.getenv("CONAN_CHANNEL", "testing")
@@ -15,7 +16,7 @@ class IcuConan(ConanFile):
         self.run("cmake --build . %s" % cmake.build_config)
 
     def imports(self):
-        self.copy(pattern="*.dll", dst="bin", src="bin")
+        self.copy(pattern="*.dll", dst="bin", src="lib")
 
     def test(self):
         self.run(os.sep.join([".","bin", "tst_icu"]))
